@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  glpi_app:
+    image: sdbrasil/glpi:10.0.11
+    container_name: glpi-10
+    volumes:
+      - glpi_config:/etc/glpi
+      - glpi_documents:/var/lib/glpi/files/data-documents
+      - glpi_plugins:/usr/share/glpi/plugins
+      - glpi_marketplace:/usr/share/glpi/marketplace
+      - glpi_files_plugins:/var/lib/glpi/files/_plugins
+      - glpi_backup:/backup
+    networks:
+      - glpi
+    ports:
+      - 80:80
+
+  glpidb:
+    image: percona/percona-server:8.0
+    container_name: db-glpi-10
+    networks:
+      - glpi
+    volumes:
+      - glpi_db_log:/var/log/mysql
+      - glpi_db_lib:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ADM@MySQL_GLP1
+      - MYSQL_DATABASE=glpi
+      - MYSQL_USER=glpi
+      - MYSQL_PASSWORD=GLP1_MySQL@10
+
+networks:
+  glpi:
+    external: true
+    name: glpi
+
+volumes:
+  glpi_config:
+    external: true
+  glpi_documents:
+    external: true
+  glpi_plugins:
+    external: true
+  glpi_marketplace:
+    external: true
+  glpi_files_plugins:
+    external: true
+  glpi_backup:
+    external: true
+  glpi_db_log:
+    external: true
+  glpi_db_lib:
+      external: true
