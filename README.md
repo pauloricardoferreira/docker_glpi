@@ -117,4 +117,4 @@ glpi-console glpi:database:install -L pt_BR -Hdb-glpi-10 -dglpi -uglpi -pGLP1_My
 
 ## Finalização
 
-Após a reliação dos procedimentos, o GLPI deve estar disponivel no IP ou Nome do Dompinio
+Após a reliação dos procedimentos, o GLPI deve estar disponivel no IP ou Nome do Domínio
